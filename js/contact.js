@@ -8,9 +8,12 @@ $(function() {
         const phoneNumber = '917549901768';
 
         // 2. Get the user's input from the form fields using their IDs
-        const userName = $('#userName').val();
-        const userRequirement = $('#userRequirement').val();
-
+          const userName = $('#userName').val();
+          const lastName = $('#userLastName').val();
+          const email = $('#userEmail').val();
+          const phone = $('#userPhone').val();
+          const userRequirement = $('#userRequirement').val();
+          
         // 3. Simple validation to make sure fields are not empty
         if (userName.trim() === '' || userRequirement.trim() === '') {
             alert('Please fill in your name and requirement before sending.');
@@ -19,15 +22,15 @@ $(function() {
 
         // 4. Create the pre-filled message
         // The \n\n creates a new line in the WhatsApp message for better readability.
-        const message = `Hello, my name is ${userName}. \n\nMy requirement is: ${userRequirement}`;
-
+          const message =
+            `Hello, my name is ${userName} ${lastName || ''}.\n` +
+            `Email: ${email || '-'}\n` +
+            `Phone: ${phone || '-'}\n\n` +
+            `My requirement is: ${userRequirement}`;
         // 5. Encode the message so it can be used in a URL
+       
         const encodedMessage = encodeURIComponent(message);
-
-        // 6. Create the final WhatsApp URL
         const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-        // 7. Open the URL in a new browser tab
         window.open(whatsappURL, '_blank');
     });
 
